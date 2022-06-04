@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг»
 
 * Студент: [Yevheniia Horbachova](https://up.htmlacademy.ru/javascript/26/user/1155739).
-* Наставник: `Неизвестно`.
+* Наставник: [Евгений Лепёшкин](https://htmlacademy.ru/profile/id144641)
 
 ---
 
