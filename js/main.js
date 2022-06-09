@@ -5,7 +5,7 @@ const getRandomInt = (min, max) => {
   return ( Math.round(Math.random() * (max - min) + min) );
 }
 
-getRandomNumber();
+getRandomInt();
 
 const getRandomFloat = (min, max, afterDot) => {
   if (min < 0 || max < 0) {
@@ -14,4 +14,4 @@ const getRandomFloat = (min, max, afterDot) => {
   return ( (Math.random() * (max - min) + min).toFixed(afterDot) );
 }
 
-getRandomNumber2();
+getRandomFloat();
