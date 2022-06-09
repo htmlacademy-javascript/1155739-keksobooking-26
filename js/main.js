@@ -1,9 +1,17 @@
+function getRandomNumber(min, max) {
+  if (min < 0 || max < 0) {
+    return -1;
+    }
+  return ( Math.round(Math.random() * (max - min) + min) );
+}
 
-function getRandomNumber(min, max, afterDot) {
-  if (min < -1 || max < 0 || min >= max) {
-    return('Неверный диапазон! Укажите другие числа.');
-  }
+getRandomNumber();
+
+function getRandomNumber2(min, max, afterDot) {
+  if (min < 0 || max < 0) {
+    return -1;
+    }
   return ( (Math.random() * (max - min) + min).toFixed(afterDot) );
 }
 
-getRandomNumber(1,2, 6);
+getRandomNumber2();
