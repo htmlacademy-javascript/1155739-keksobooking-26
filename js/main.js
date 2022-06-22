@@ -56,7 +56,11 @@ getRandomFloat();
 const getImageAddress = (number) => {
   const imageAddress = number.splice(getRandomInt(number), 1);
   return (imageAddress > 9) ? imageAddress :  `0${imageAddress}`;
-}
+};
+
+const getAvatar = () => {
+ return 'img/avatar/user.${getImageAddress()}.png';
+};
 
 const shuffleArray = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
@@ -69,7 +73,7 @@ const shuffleArray = (array) => {
 const createOffers = () => {
 return ({
   author: {
-    avatar: написать, },
+    avatar: getAvatar },
     offer: {
       title: text.title,
       address: [location.lat, location.lng],
