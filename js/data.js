@@ -3,8 +3,8 @@ import {getRandomInt, getRandomFloat, getImageAddress, shuffleArray} from './uti
 const APARTMENT_TYPES = ['palace', 'flat', 'house', 'bungalow', 'hotel',];
 const TIME = ['12:00', '13:00', '14:00',];
 const APARTMENT_FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner',];
-const APARTMENT_PHOTOS = ['https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
-  'ttps://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
+const APARTMENT_PHOTOS = [ 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',];
 const DIGIT = 5;
 const CHARACTERISTIC_COUNT = 10;
@@ -38,25 +38,29 @@ const text = {
 const offersArray = [];
 
 for (let i = 0; i < CHARACTERISTIC_COUNT; i++) {
+  const getCoorditanes = {
+    lat: getRandomFloat(lat.MIN, lat.MAX, DIGIT),
+    lng: getRandomFloat(lng.MIN, lng.MAX, DIGIT),
+  };
   offersArray.push({
     author: {
-      avatar: `${getImageAddress(getRandomInt(0, 10))}` },
+      avatar: `${getImageAddress(getRandomInt(1, 10))}` },
     offer: {
       title: text.title,
-      address: '',
+      address: `${getCoorditanes.lat}, ${getCoorditanes.lng}`,
       price: getRandomInt(price.MIN, price.MAX),
       type: APARTMENT_TYPES[getRandomInt(0, APARTMENT_TYPES.length)],
       rooms: getRandomInt(rooms.MIN, rooms.MAX),
-      guests: rooms - 1,
+      guests: getRandomInt(rooms.MIN, rooms.MAX),
       checkin: TIME[getRandomInt(0, TIME.length - 1)],
       checkout: TIME[getRandomInt(0, TIME.length - 1)],
-      features: shuffleArray(APARTMENT_FEATURES).splice(0, APARTMENT_FEATURES.length),
+      features: shuffleArray(APARTMENT_FEATURES).slice(0,getRandomInt(1,APARTMENT_FEATURES.length)),
       description: text.description,
-      photos: shuffleArray(APARTMENT_PHOTOS).splice(0, APARTMENT_PHOTOS.length)
+      photos: shuffleArray(APARTMENT_PHOTOS).slice(0,getRandomInt(1,APARTMENT_PHOTOS.length)),
     },
     location: {
-      lat: getRandomFloat(lat.MIN, lat.MAX, DIGIT),
-      lng: getRandomFloat(lng.MIN, lng.MAX, DIGIT),
+      lat: getCoorditanes.lat,
+      lng: getCoorditanes.lng,
     },
   });
 }
