@@ -77,16 +77,20 @@ const renderCard = ({ author, offer }) => {
   } else { description.remove();
   }
   //features
-  const features = newTemplate.querySelectorAll('.popup-feature');
+  const features = newTemplate.querySelectorAll('.popup__feature');
 
   if (offer.features.length > 0) {
     const modifiers = offer.features.map((feature) => `popup__feature--${feature}` );
-    features.forEach( (item, i) => {
-      if ( !item.classList.contains(modifiers[i]) ) {
+    features.forEach( (item) => {
+      if ( !modifiers.includes(item.classList[1]) ) {
         item.remove();
       }});
   } else {newTemplate.querySelector('.popup__features').remove();
   }
+
+  //   // if ( !modifiers.includes(item.classList[1]) ) {
+
+
   //pnotos
   const photoContainer = newTemplate.querySelector('.popup__photos');
   if (offer.photos.length > 0) {

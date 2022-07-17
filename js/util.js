@@ -19,7 +19,7 @@ const getRandomFloat = (min, max, digits = 1) => {
 getRandomFloat();
 
 const getImageAddress = (number) => {
-  if (number === 10) {
+  if (number >= 10) {
     return `img/avatars/user${number}.png`;
   }
   return `img/avatars/user0${number}.png`;
