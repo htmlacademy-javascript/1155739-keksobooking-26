@@ -88,9 +88,6 @@ const renderCard = ({ author, offer }) => {
   } else {newTemplate.querySelector('.popup__features').remove();
   }
 
-  //   // if ( !modifiers.includes(item.classList[1]) ) {
-
-
   //pnotos
   const photoContainer = newTemplate.querySelector('.popup__photos');
   if (offer.photos.length > 0) {
