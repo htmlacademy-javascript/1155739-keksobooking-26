@@ -44,7 +44,7 @@ for (let i = 0; i < CHARACTERISTIC_COUNT; i++) {
   };
   offersArray.push({
     author: {
-      avatar: `${getImageAddress(getRandomInt(1, 10))}` },
+      avatar: `${getImageAddress(getRandomInt(1, 11))}` },
     offer: {
       title: text.title,
       address: `${getCoorditanes.lat}, ${getCoorditanes.lng}`,
