@@ -16,7 +16,7 @@ const typeOfHouse = {
   palace: 10000,
 };
 const getMinPrice = () => typeOfHouse[type.value];
-console.log(typeof(getMinPrice()));
+getMinPrice();
 
 const priceChangeHandler = () => {
   price.min = getMinPrice();
@@ -76,7 +76,8 @@ title.addEventListener('submit', (evt) => {
 });
 //цена за ночь
 const priceErrorMessage = () => `Минимальная цена: ${getMinPrice()}`;
-pristine.addValidator(price, (value) => (value >= getMinPrice()), priceErrorMessage());
+const validatePrice = () => Number(price.value) >= typeOfHouse[type.value];
+pristine.addValidator(price, validatePrice, priceErrorMessage);
 const typeValidateHandler = () => {
   if (price.value) {
     pristine.validate(price);
