@@ -23,8 +23,7 @@ const makeDisabled = () => {
   mapFilters.classList.toggle('map__filters--disabled');
 
   disabledToggle();
-  address.value = `${CENTER_COORDINATES.lat}, ${CENTER_COORDINATES.lng}`;
-};
+  address.value = `${CENTER_COORDINATES.lat}, ${CENTER_COORDINATES.lng}`;};
 
 makeDisabled();
 

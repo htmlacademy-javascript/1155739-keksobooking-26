@@ -7,6 +7,7 @@ const timeOut = adForm.querySelector('#timeout');
 const capacity = adForm.querySelector('#capacity');
 const roomNumber = adForm.querySelector('#room_number');
 const guestCapacity = capacity.querySelectorAll('option');
+const slider = adForm.querySelector('.ad-form__slider');
 
 const typeOfHouse = {
   bungalow: 0,
@@ -85,3 +86,29 @@ const typeValidateHandler = () => {
 };
 
 type.addEventListener('input', typeValidateHandler);
+
+//Движок цены
+noUiSlider.create(slider, {
+  range: {
+    min: 0,
+    max: 100000,
+  },
+  start: 0,
+  step: 1,
+  connect: 'lower',
+  format: {
+    to: function (value) {
+      return value.toFixed(0);
+    },
+    from: function (value) {
+      return parseFloat(value);
+    },
+  },
+});
+slider.noUiSlider.updateOptions({
+  start: getMinPrice(),
+  range: {
+    'min': getMinPrice(),
+    'max': 100000,
+  }
+});
