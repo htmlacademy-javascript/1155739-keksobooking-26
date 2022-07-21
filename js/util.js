@@ -46,4 +46,8 @@ const numDecline = (num, nominative, genitiveSingular, genitivePlural) => {
   return genitivePlural;
 };
 
-export { numDecline, getRandomInt, getRandomFloat, getImageAddress, shuffleArray };
+const getAddressCoordinates = (coordinates) => {
+  addressForm.value = `${(coordinates.lat).toFixed(5)}, ${(coordinates.lng).toFixed(5)}`;
+};
+
+export { numDecline, getRandomInt, getRandomFloat, getImageAddress, shuffleArray, getAddressCoordinates };
