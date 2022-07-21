@@ -18,6 +18,7 @@ const typeOfHouse = {
 };
 const getMinPrice = () => typeOfHouse[type.value];
 getMinPrice();
+const minPrice = getMinPrice();
 
 const priceChangeHandler = () => {
   price.min = getMinPrice();
@@ -93,7 +94,7 @@ noUiSlider.create(slider, {
     min: 0,
     max: 100000,
   },
-  start: 0,
+  start: 1000,
   step: 1,
   connect: 'lower',
   format: {
@@ -105,10 +106,30 @@ noUiSlider.create(slider, {
     },
   },
 });
-slider.noUiSlider.updateOptions({
-  start: getMinPrice(),
-  range: {
-    'min': getMinPrice(),
-    'max': 100000,
+
+type.addEventListener('change', (evt) => {
+  if (evt.target.checked) {
+    slider.noUiSlider.updateOptions({
+      range: {
+        min: 0,
+        max: 100000,
+      },
+      start: minPrice(),
+      step: 1
+    });
+  } else {
+    slider.noUiSlider.updateOptions({
+      range: {
+        min: 0,
+        max: 100000,
+      },
+      step: 1
+    });
+    slider.noUiSlider.set(getMinPrice());
   }
+});
+
+//записываем в поле ввода
+slider.noUiSlider.on('update', () => {
+  price.value = slider.noUiSlider.get();
 });
