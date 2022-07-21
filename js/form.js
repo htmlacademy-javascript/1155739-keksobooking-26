@@ -117,16 +117,7 @@ type.addEventListener('change', (evt) => {
       start: minPrice(),
       step: 1
     });
-  } else {
-    slider.noUiSlider.updateOptions({
-      range: {
-        min: 0,
-        max: 100000,
-      },
-      step: 1
-    });
-    slider.noUiSlider.set(getMinPrice());
-  }
+  } slider.noUiSlider.set(getMinPrice());
 });
 
 //записываем в поле ввода
