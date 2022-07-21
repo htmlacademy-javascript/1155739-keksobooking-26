@@ -4,6 +4,8 @@
   <meta charset="utf-8">
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="./leaflet/leaflet.css">
+  <link rel="stylesheet" href="./nouislider/nouislider.css">
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <title>Кексобукинг</title>
 </head>
@@ -101,7 +103,7 @@ placeholder="Милая, уютная квартирка в центре Ток�
           <label class="ad-form__label" for="type">Тип жилья</label>
           <select id="type" name="type">
             <option value="bungalow">Бунгало</option>
-            <option value="flat">Квартира</option>
+            <option value="flat" selected>Квартира</option>
             <option value="hotel">Отель</option>
             <option value="house">Дом</option>
             <option value="palace">Дворец</option>
@@ -109,7 +111,7 @@ placeholder="Милая, уютная квартирка в центре Ток�
         </fieldset>
         <fieldset class="ad-form__element">
           <label class="ad-form__label" for="price">Цена за ночь, руб.</label>
-          <input id="price" name="price" type="number" placeholder="5000" max="100000" required>
+          <input id="price" name="price" type="number" placeholder="1000" max="100000" required>
           <div class="ad-form__slider"></div>
         </fieldset>
         <fieldset class="ad-form__element ad-form__element--time">
@@ -233,6 +235,8 @@ placeholder="Милая, уютная квартирка в центре Ток�
     </div>
   </template>
 
+  <script src="./nouislider/nouislider.js"></script>
+  <script src="./leaflet/leaflet.js"></script>
   <script src ="./pristine/pristine.min.js"></script>
   <script type="module" src="js/main.js"></script>
 

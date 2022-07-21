@@ -7,6 +7,7 @@ const timeOut = adForm.querySelector('#timeout');
 const capacity = adForm.querySelector('#capacity');
 const roomNumber = adForm.querySelector('#room_number');
 const guestCapacity = capacity.querySelectorAll('option');
+const slider = adForm.querySelector('.ad-form__slider');
 
 const typeOfHouse = {
   bungalow: 0,
@@ -16,7 +17,8 @@ const typeOfHouse = {
   palace: 10000,
 };
 const getMinPrice = () => typeOfHouse[type.value];
-console.log(typeof(getMinPrice()));
+getMinPrice();
+const minPrice = getMinPrice();
 
 const priceChangeHandler = () => {
   price.min = getMinPrice();
@@ -76,7 +78,8 @@ title.addEventListener('submit', (evt) => {
 });
 //цена за ночь
 const priceErrorMessage = () => `Минимальная цена: ${getMinPrice()}`;
-pristine.addValidator(price, (value) => (value >= getMinPrice()), priceErrorMessage());
+const validatePrice = () => Number(price.value) >= typeOfHouse[type.value];
+pristine.addValidator(price, validatePrice, priceErrorMessage);
 const typeValidateHandler = () => {
   if (price.value) {
     pristine.validate(price);
@@ -84,3 +87,39 @@ const typeValidateHandler = () => {
 };
 
 type.addEventListener('input', typeValidateHandler);
+
+//Движок цены
+noUiSlider.create(slider, {
+  range: {
+    min: 0,
+    max: 100000,
+  },
+  start: 1000,
+  step: 1,
+  connect: 'lower',
+  format: {
+    to: function (value) {
+      return value.toFixed(0);
+    },
+    from: function (value) {
+      return parseFloat(value);
+    },
+  },
+});
+
+type.addEventListener('change', (evt) => {
+  if (evt.target.checked) {
+    slider.noUiSlider.updateOptions({
+      range: {
+        min: 0,
+        max: 100000,
+      },
+      step: 1
+    });
+  } slider.noUiSlider.set(getMinPrice());
+});
+
+//записываем в поле ввода
+slider.noUiSlider.on('update', () => {
+  price.value = slider.noUiSlider.get();
+});
