@@ -114,7 +114,6 @@ type.addEventListener('change', (evt) => {
         min: 0,
         max: 100000,
       },
-      start: minPrice(),
       step: 1
     });
   } slider.noUiSlider.set(getMinPrice());
