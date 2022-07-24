@@ -1,6 +1,11 @@
+import { request } from './fetch.js';
+import { sendDataSuccess, sendDataError } from './responses.js';
+import { CENTER_COORDINATES, mapReset } from './map.js';
+
 const adForm = document.querySelector('.ad-form');
 const title = adForm.querySelector('#title');
 const type = adForm.querySelector('#type');
+const address = adForm.querySelector('#address');
 const price = adForm.querySelector('#price');
 const timeIn = adForm.querySelector('#timein');
 const timeOut = adForm.querySelector('#timeout');
@@ -8,6 +13,7 @@ const capacity = adForm.querySelector('#capacity');
 const roomNumber = adForm.querySelector('#room_number');
 const guestCapacity = capacity.querySelectorAll('option');
 const slider = adForm.querySelector('.ad-form__slider');
+const resetButton = adForm.querySelector('.ad-form__reset');
 
 const typeOfHouse = {
   bungalow: 0,
@@ -18,7 +24,6 @@ const typeOfHouse = {
 };
 const getMinPrice = () => typeOfHouse[type.value];
 getMinPrice();
-const minPrice = getMinPrice();
 
 const priceChangeHandler = () => {
   price.min = getMinPrice();
@@ -68,8 +73,6 @@ const pristine = new Pristine(adForm, {
   errorTextParent: 'ad-form__element',
   errorTextClass: 'ad-form__error-text',
 });
-
-
 title.addEventListener('submit', (evt) => {
   evt.preventDefault();
   const isValid = pristine.validate();
@@ -123,3 +126,26 @@ type.addEventListener('change', (evt) => {
 slider.noUiSlider.on('update', () => {
   price.value = slider.noUiSlider.get();
 });
+
+const resetForm = () => {
+  adForm.reset();
+  mapReset()
+  address.value = `${CENTER_COORDINATES.lat}, ${ CENTER_COORDINATES.lng}`;
+};
+
+
+document.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+  const isValid = pristine.validate();
+  if (isValid) {
+    request(sendDataSuccess, sendDataError, 'POST', new FormData(evt.target));
+    resetForm();
+  }
+});
+
+resetButton.addEventListener('click', (evt) => {
+  evt.preventDefault();
+  resetForm();
+
+});
+

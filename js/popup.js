@@ -79,7 +79,7 @@ const renderCard = ({ author, offer }) => {
   //features
   const features = newTemplate.querySelectorAll('.popup__feature');
 
-  if (offer.features.length > 0) {
+  if (offer.features && offer.features.length > 0 > 0) {
     const modifiers = offer.features.map((feature) => `popup__feature--${feature}` );
     features.forEach( (item) => {
       if ( !modifiers.includes(item.classList[1]) ) {
@@ -90,7 +90,7 @@ const renderCard = ({ author, offer }) => {
 
   //pnotos
   const photoContainer = newTemplate.querySelector('.popup__photos');
-  if (offer.photos.length > 0) {
+  if (offer.photos && offer.photos.length > 0) {
     photoContainer.append(renderImages(photoContainer, offer.photos));
   } else {
     photoContainer.remove();
