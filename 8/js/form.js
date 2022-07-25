@@ -129,7 +129,7 @@ slider.noUiSlider.on('update', () => {
 
 const resetForm = () => {
   adForm.reset();
-  mapReset()
+  mapReset();
   address.value = `${CENTER_COORDINATES.lat}, ${ CENTER_COORDINATES.lng}`;
 };
 

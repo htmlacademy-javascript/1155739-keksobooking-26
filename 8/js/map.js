@@ -76,10 +76,10 @@ const createPinMarker = (card) => {
 const renderPinMarker = (data) =>
   data.forEach(createPinMarker);
 
-  const mapReset = () => {
+const mapReset = () => {
   mainPinMarker.setLatLng(CENTER_COORDINATES);
   map.setView(CENTER_COORDINATES, ZOOM);
   map.closePopup();
-  }
+};
 
 export {renderPinMarker, CENTER_COORDINATES, mapReset };
