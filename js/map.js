@@ -74,11 +74,12 @@ const mapReset = () => {
   map.closePopup();
 };
 
+
 map.on('load', () => {
   makeDisabled();
   mapReset();
   request(showAds, showAdsError, 'GET');
   address.value = `${CENTER_COORDINATES.lat}, ${ CENTER_COORDINATES.lng}`;
-});
+}).setView(CENTER_COORDINATES, ZOOM);
 
 export {renderPinMarker, CENTER_COORDINATES, mapReset };

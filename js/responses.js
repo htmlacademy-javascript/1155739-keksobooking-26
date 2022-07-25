@@ -32,7 +32,6 @@ const sendDataSuccess = () => {
   const message = temlate.cloneNode(true);
   document.body.append(message);
 
-  //Ошибка отправки обьявления
   const removeMessage = (evt) => {
     if (evt.type === 'keydown' && evt.key === 'Escape' || evt.type === 'click')  {
       evt.preventDefault();
@@ -43,6 +42,7 @@ const sendDataSuccess = () => {
   document.addEventListener('keydown', removeMessage);
 };
 
+//Ошибка отправки обьявления
 const sendDataError = () => {
   const temlate = document.querySelector('#error')
     .content

@@ -139,7 +139,8 @@ document.addEventListener('submit', (evt) => {
   const isValid = pristine.validate();
   if (isValid) {
     request(sendDataSuccess, sendDataError, 'POST', new FormData(evt.target));
-    resetForm();
+    // resetForm();
+    console.log('rrrrr');
   }
 });
 
