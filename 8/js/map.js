@@ -2,7 +2,7 @@ import {getAddressCoordinates} from './util.js';
 import { renderCard } from './popup.js';
 import { makeDisabled } from './mode.js';
 import { showAds, showAdsError } from './responses.js';
-import { request } from './fetch.js';
+import { request } from './api.js';
 
 const address = document.querySelector('#address');
 address.value = '35.69034, 139.75175';
@@ -11,16 +11,7 @@ const CENTER_COORDINATES = {lat: 35.69034, lng: 139.75175};
 const ZOOM = 12;
 
 const L = window.L;
-const map = L.map('map-canvas')
-  .on('load', () => {
-    makeDisabled();
-    request(showAds, showAdsError, 'GET');
-    address.value = `${CENTER_COORDINATES.lat}, ${ CENTER_COORDINATES.lng}`;
-  })
-  .setView({
-    lat: CENTER_COORDINATES.lat,
-    lng: CENTER_COORDINATES.lng,
-  }, ZOOM);
+const map = L.map('map-canvas');
 
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -76,10 +67,18 @@ const createPinMarker = (card) => {
 const renderPinMarker = (data) =>
   data.forEach(createPinMarker);
 
+//Переход в дефолтное состояние
 const mapReset = () => {
   mainPinMarker.setLatLng(CENTER_COORDINATES);
   map.setView(CENTER_COORDINATES, ZOOM);
   map.closePopup();
 };
+
+map.on('load', () => {
+  makeDisabled();
+  mapReset();
+  request(showAds, showAdsError, 'GET');
+  address.value = `${CENTER_COORDINATES.lat}, ${ CENTER_COORDINATES.lng}`;
+});
 
 export {renderPinMarker, CENTER_COORDINATES, mapReset };

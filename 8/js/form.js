@@ -1,4 +1,4 @@
-import { request } from './fetch.js';
+import { request } from './api.js';
 import { sendDataSuccess, sendDataError } from './responses.js';
 import { CENTER_COORDINATES, mapReset } from './map.js';
 
