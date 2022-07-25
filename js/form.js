@@ -1,4 +1,4 @@
-import { request } from './fetch.js';
+import { request } from './api.js';
 import { sendDataSuccess, sendDataError } from './responses.js';
 import { CENTER_COORDINATES, mapReset } from './map.js';
 
@@ -7,7 +7,7 @@ const title = adForm.querySelector('#title');
 const type = adForm.querySelector('#type');
 const address = adForm.querySelector('#address');
 const price = adForm.querySelector('#price');
-const timeIn = adForm.querySelector('#timein');
+const timeIn = adForm.querySelectr('#timein');
 const timeOut = adForm.querySelector('#timeout');
 const capacity = adForm.querySelector('#capacity');
 const roomNumber = adForm.querySelector('#room_number');

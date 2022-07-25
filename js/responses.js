@@ -1,14 +1,15 @@
 import { renderPinMarker } from './map.js';
-// import { removeItem } from './util.js';
 
 const MAX_OFFERS = 10;
 
+//Звгрузка обьявлений
 let offers = [];
 const showAds = (data) => {
   offers = data.slice();
   renderPinMarker(offers.slice(0, MAX_OFFERS));
 };
 
+//Ошибка загрузки обьявлений
 const showAdsError = () => {
   const errorMessage = document.createElement('div');
   errorMessage.style.position = 'absolute';
@@ -23,12 +24,15 @@ const showAdsError = () => {
   document.body.append(errorMessage);
 };
 
+//Отправка обьявления
 const sendDataSuccess = () => {
   const temlate = document.querySelector('#success')
     .content
     .querySelector('.success');
   const message = temlate.cloneNode(true);
   document.body.append(message);
+
+  //Ошибка отправки обьявления
   const removeMessage = (evt) => {
     if (evt.type === 'keydown' && evt.key === 'Escape' || evt.type === 'click')  {
       evt.preventDefault();
@@ -45,6 +49,7 @@ const sendDataError = () => {
     .querySelector('.error');
   const message = temlate.cloneNode(true);
   document.body.append(message);
+
 
   const removeMessage = (evt) => {
     if (evt.type === 'keydown' && evt.key === 'Escape' || evt.type === 'click')  {
