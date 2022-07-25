@@ -1,41 +1,17 @@
 import {getAddressCoordinates} from './util.js';
-import {offersArray} from './data.js';
 import { renderCard } from './popup.js';
+import { makeDisabled } from './mode.js';
+import { showAds, showAdsError } from './responses.js';
+import { request } from './api.js';
 
-const adForm = document.querySelector('.ad-form');
-const mapFilters = document.querySelector('.map__filters');
-const disabledFields = document.querySelectorAll('select.map__filter, fieldset');
-const address = adForm.querySelector('#address');
-address.setAttribute('readonly', true);
+const address = document.querySelector('#address');
+address.value = '35.69034, 139.75175';
 
-const L = window.L;
 const CENTER_COORDINATES = {lat: 35.69034, lng: 139.75175};
 const ZOOM = 12;
 
-const disabledToggle = () => {
-  disabledFields.forEach((line) => {
-    line.disabled = !line.disabled;
-  });
-};
-
-const makeDisabled = () => {
-  adForm.classList.toggle('ad-form--disabled');
-  mapFilters.classList.toggle('map__filters--disabled');
-
-  disabledToggle();
-  address.value = `${CENTER_COORDINATES.lat}, ${CENTER_COORDINATES.lng}`;};
-
-makeDisabled();
-
-//МАПА
-const map = L.map('map-canvas')
-  .on('load', () => {
-    makeDisabled();
-  })
-  .setView({
-    lat: CENTER_COORDINATES.lat,
-    lng: CENTER_COORDINATES.lng,
-  }, ZOOM);
+const L = window.L;
+const map = L.map('map-canvas');
 
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -83,14 +59,27 @@ const createPinMarker = (card) => {
       icon: PIN,
     },
   );
-
   pinMarker
     .addTo(markerGroup)
     .bindPopup(
       renderCard(card));};
 
-offersArray.forEach((card) => {
-  createPinMarker(card);
-});
+const renderPinMarker = (data) =>
+  data.forEach(createPinMarker);
+
+//Переход в дефолтное состояние
+const mapReset = () => {
+  mainPinMarker.setLatLng(CENTER_COORDINATES);
+  map.setView(CENTER_COORDINATES, ZOOM);
+  map.closePopup();
+};
 
 
+map.on('load', () => {
+  makeDisabled();
+  mapReset();
+  request(showAds, showAdsError, 'GET');
+  address.value = `${CENTER_COORDINATES.lat}, ${ CENTER_COORDINATES.lng}`;
+}).setView(CENTER_COORDINATES, ZOOM);
+
+export {renderPinMarker, CENTER_COORDINATES, mapReset };
