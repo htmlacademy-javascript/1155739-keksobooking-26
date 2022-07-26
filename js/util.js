@@ -50,7 +50,7 @@ const getAddressCoordinates = (form, coordinates) => {
   form.value = `${(coordinates.lat).toFixed(5)}, ${(coordinates.lng).toFixed(5)}`;
 };
 
-const debounce = (cb, timeout = 300) => {
+const debounce = (cb, timeout = 500) => {
   let timer;
   return (...rest) => {
     clearTimeout(timer);
