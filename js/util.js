@@ -50,4 +50,12 @@ const getAddressCoordinates = (form, coordinates) => {
   form.value = `${(coordinates.lat).toFixed(5)}, ${(coordinates.lng).toFixed(5)}`;
 };
 
-export { numDecline, getRandomInt, getRandomFloat, getImageAddress, shuffleArray, getAddressCoordinates };
+const debounce = (cb, timeout = 500) => {
+  let timer;
+  return (...rest) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => { cb.apply(this, rest); }, timeout);
+  };
+};
+
+export { numDecline, getRandomInt, getRandomFloat, getImageAddress, shuffleArray, getAddressCoordinates, debounce };

@@ -1,14 +1,3 @@
-import { renderPinMarker } from './map.js';
-
-const MAX_OFFERS = 10;
-
-//Звгрузка обьявлений
-let offers = [];
-const showAds = (data) => {
-  offers = data.slice();
-  renderPinMarker(offers.slice(0, MAX_OFFERS));
-};
-
 //Ошибка загрузки обьявлений
 const showAdsError = () => {
   const errorMessage = document.createElement('div');
@@ -62,4 +51,4 @@ const sendDataError = () => {
   document.querySelector('.error__button').addEventListener('click', removeMessage);
 };
 
-export { showAds, showAdsError, sendDataSuccess, sendDataError };
+export { showAdsError, sendDataSuccess, sendDataError };
