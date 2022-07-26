@@ -98,7 +98,7 @@ noUiSlider.create(slider, {
     max: 100000,
   },
   start: 1000,
-  step: 100,
+  step: 1,
   connect: 'lower',
   format: {
     to: function (value) {
@@ -117,7 +117,6 @@ type.addEventListener('change', (evt) => {
         min: 0,
         max: 100000,
       },
-      step: 1
     });
   } slider.noUiSlider.set(getMinPrice());
 });
