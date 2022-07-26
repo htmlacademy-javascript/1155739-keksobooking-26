@@ -1,10 +1,12 @@
-import {getAddressCoordinates} from './util.js';
+import {getAddressCoordinates, debounce} from './util.js';
 import { renderCard } from './popup.js';
 import { makeDisabled } from './mode.js';
-import { showAds, showAdsError } from './responses.js';
+import { showAdsError } from './responses.js';
 import { request } from './api.js';
+import { filterData, MAX_OFFERS } from './filtration.js';
 
 const address = document.querySelector('#address');
+const filters = document.querySelector('.map__filters');
 address.value = '35.69034, 139.75175';
 
 const CENTER_COORDINATES = {lat: 35.69034, lng: 139.75175};
@@ -50,7 +52,7 @@ mainPinMarker.on('moveend', (evt) => {
 
 mainPinMarker.addTo(map);
 
-//создаем слой и каhточки пинов
+//создаем слой и карточки пинов
 const markerGroup = L.layerGroup().addTo(map);
 
 const createPinMarker = (card) => {
@@ -64,14 +66,31 @@ const createPinMarker = (card) => {
     .bindPopup(
       renderCard(card));};
 
-const renderPinMarker = (data) =>
+const renderPinMarkers = (data) =>
   data.forEach(createPinMarker);
+
+let offers = [];
+
+const filterChangeHandler = debounce(() => {
+  markerGroup.clearLayers();
+  renderPinMarkers(filterData(offers));
+});
+
+//Загрузка обьявлений
+const showAds = (data) => {
+  offers = data.slice();
+  renderPinMarkers(offers.slice(0, MAX_OFFERS));
+  filters.addEventListener('change', filterChangeHandler);
+};
 
 //Переход в дефолтное состояние
 const mapReset = () => {
   mainPinMarker.setLatLng(CENTER_COORDINATES);
-  map.setView(CENTER_COORDINATES, ZOOM);
   map.closePopup();
+  filters.reset();
+  markerGroup.clearLayers();
+  renderPinMarkers(offers.slice(0, MAX_OFFERS));
+  map.setView(CENTER_COORDINATES, ZOOM);
 };
 
 
@@ -82,4 +101,4 @@ map.on('load', () => {
   address.value = `${CENTER_COORDINATES.lat}, ${ CENTER_COORDINATES.lng}`;
 }).setView(CENTER_COORDINATES, ZOOM);
 
-export {renderPinMarker, CENTER_COORDINATES, mapReset };
+export {renderPinMarkers, CENTER_COORDINATES, mapReset };

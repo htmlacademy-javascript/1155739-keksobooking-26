@@ -98,7 +98,7 @@ noUiSlider.create(slider, {
     max: 100000,
   },
   start: 1000,
-  step: 1,
+  step: 100,
   connect: 'lower',
   format: {
     to: function (value) {
@@ -139,8 +139,7 @@ document.addEventListener('submit', (evt) => {
   const isValid = pristine.validate();
   if (isValid) {
     request(sendDataSuccess, sendDataError, 'POST', new FormData(evt.target));
-    // resetForm();
-    console.log('rrrrr');
+    resetForm();
   }
 });
 
