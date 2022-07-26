@@ -2,8 +2,9 @@ import {getAddressCoordinates, debounce} from './util.js';
 import { renderCard } from './popup.js';
 import { makeDisabled } from './mode.js';
 import { showAdsError } from './responses.js';
-import { request } from './api.js';
+import { makeRequest } from './api.js';
 import { filterData, MAX_OFFERS } from './filtration.js';
+import { resetPreview } from './preview.js';
 
 const address = document.querySelector('#address');
 const filters = document.querySelector('.map__filters');
@@ -89,6 +90,7 @@ const mapReset = () => {
   map.closePopup();
   filters.reset();
   markerGroup.clearLayers();
+  resetPreview();
   renderPinMarkers(offers.slice(0, MAX_OFFERS));
   map.setView(CENTER_COORDINATES, ZOOM);
 };
@@ -97,7 +99,7 @@ const mapReset = () => {
 map.on('load', () => {
   makeDisabled();
   mapReset();
-  request(showAds, showAdsError, 'GET');
+  makeRequest(showAds, showAdsError, 'GET');
   address.value = `${CENTER_COORDINATES.lat}, ${ CENTER_COORDINATES.lng}`;
 }).setView(CENTER_COORDINATES, ZOOM);
 

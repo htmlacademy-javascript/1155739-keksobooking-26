@@ -1,4 +1,4 @@
-import { request } from './api.js';
+import { makeRequest } from './api.js';
 import { sendDataSuccess, sendDataError } from './responses.js';
 import { CENTER_COORDINATES, mapReset } from './map.js';
 
@@ -138,7 +138,7 @@ document.addEventListener('submit', (evt) => {
   evt.preventDefault();
   const isValid = pristine.validate();
   if (isValid) {
-    request(sendDataSuccess, sendDataError, 'POST', new FormData(evt.target));
+    makeRequest(sendDataSuccess, sendDataError, 'POST', new FormData(evt.target));
     resetForm();
   }
 });
