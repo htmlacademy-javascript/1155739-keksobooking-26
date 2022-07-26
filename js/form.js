@@ -127,6 +127,10 @@ slider.noUiSlider.on('update', () => {
   price.value = slider.noUiSlider.get();
 });
 
+price.addEventListener('input', () => {
+  slider.noUiSlider.set(price.value);
+});
+
 const resetForm = () => {
   adForm.reset();
   mapReset();
