@@ -1,12 +1,16 @@
+import { makeDisabled } from './mode.js';
+
 //Ошибка загрузки обьявлений
 const showAdsError = () => {
+  makeDisabled();
   const errorMessage = document.createElement('div');
   errorMessage.style.position = 'absolute';
   errorMessage.style.top = '0';
   errorMessage.style.right = '0';
   errorMessage.style.left = '0';
   errorMessage.style.color = 'white';
-  errorMessage.style.fontSize = '25px';
+  errorMessage.style.fontSize = '30px';
+  errorMessage.style.padding = '20px 35px';
   errorMessage.style.backgroundColor = 'red';
   errorMessage.style.textAlign = 'center';
   errorMessage.textContent = 'Ошибка сервера';
