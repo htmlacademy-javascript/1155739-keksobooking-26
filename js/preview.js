@@ -36,7 +36,7 @@ photoChooser.addEventListener('change', () => {
 
 const resetPreview = () => {
   photoPreview.innerHTML = '';
-  avatarPreview.src = DEFAULT_AVATAR;
+  avatarPreview.querySelector('img').src = DEFAULT_AVATAR;
 };
 photoPreview.innerHTML = '';
 
