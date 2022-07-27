@@ -3,7 +3,7 @@ const Urls = {
   POST: 'https://26.javascript.pages.academy/keksobooking'
 };
 
-const request = (onSuccess, onFail, method, body) => {
+const makeRequest = (onSuccess, onFail, method, body) => {
   fetch(
     Urls[method],
     {
@@ -20,4 +20,4 @@ const request = (onSuccess, onFail, method, body) => {
     });
 };
 
-export {request};
+export { makeRequest };
