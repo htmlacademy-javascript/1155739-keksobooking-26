@@ -12,17 +12,17 @@ const timeOut = adForm.querySelector('#timeout');
 const capacity = adForm.querySelector('#capacity');
 const roomNumber = adForm.querySelector('#room_number');
 const guestCapacity = capacity.querySelectorAll('option');
-const slider = adForm.querySelector('.ad-form__slider');
 const resetButton = adForm.querySelector('.ad-form__reset');
+const sliderElement = adForm.querySelector('.ad-form__slider');
 
-const typeOfHouse = {
+const priceOfType = {
   bungalow: 0,
   flat: 1000,
   hotel: 3000,
   house: 5000,
   palace: 10000,
 };
-const getMinPrice = () => typeOfHouse[type.value];
+const getMinPrice = () => priceOfType[type.value];
 getMinPrice();
 
 const priceChangeHandler = () => {
@@ -81,7 +81,7 @@ title.addEventListener('submit', (evt) => {
 });
 //цена за ночь
 const priceErrorMessage = () => `Минимальная цена: ${getMinPrice()}`;
-const validatePrice = () => Number(price.value) >= typeOfHouse[type.value];
+const validatePrice = () => Number(price.value) >= priceOfType[type.value];
 pristine.addValidator(price, validatePrice, priceErrorMessage);
 const typeValidateHandler = () => {
   if (price.value) {
@@ -92,7 +92,7 @@ const typeValidateHandler = () => {
 type.addEventListener('input', typeValidateHandler);
 
 //Движок цены
-noUiSlider.create(slider, {
+noUiSlider.create(sliderElement, {
   range: {
     min: 0,
     max: 100000,
@@ -112,22 +112,22 @@ noUiSlider.create(slider, {
 
 type.addEventListener('change', (evt) => {
   if (evt.target.checked) {
-    slider.noUiSlider.updateOptions({
+    sliderElement.noUiSlider.updateOptions({
       range: {
         min: 0,
         max: 100000,
       },
     });
-  } slider.noUiSlider.set(getMinPrice());
+  } sliderElement.noUiSlider.set(getMinPrice());
 });
 
 //записываем в поле ввода
-slider.noUiSlider.on('update', () => {
-  price.value = slider.noUiSlider.get();
+sliderElement.noUiSlider.on('update', () => {
+  price.value = sliderElement.noUiSlider.get();
 });
 
 price.addEventListener('input', () => {
-  slider.noUiSlider.set(price.value);
+  sliderElement.noUiSlider.set(price.value);
 });
 
 const resetForm = () => {

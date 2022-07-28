@@ -3,26 +3,26 @@ import { makeDisabled } from './mode.js';
 //Ошибка загрузки обьявлений
 const showAdsError = () => {
   makeDisabled();
-  const errorMessage = document.createElement('div');
-  errorMessage.style.position = 'absolute';
-  errorMessage.style.top = '0';
-  errorMessage.style.right = '0';
-  errorMessage.style.left = '0';
-  errorMessage.style.color = 'white';
-  errorMessage.style.fontSize = '30px';
-  errorMessage.style.padding = '20px 35px';
-  errorMessage.style.backgroundColor = 'red';
-  errorMessage.style.textAlign = 'center';
-  errorMessage.textContent = 'Ошибка сервера';
-  document.body.append(errorMessage);
+  const errorElement = document.createElement('div');
+  errorElement.style.position = 'absolute';
+  errorElement.style.top = '0';
+  errorElement.style.right = '0';
+  errorElement.style.left = '0';
+  errorElement.style.color = 'white';
+  errorElement.style.fontSize = '30px';
+  errorElement.style.padding = '20px 35px';
+  errorElement.style.backgroundColor = 'red';
+  errorElement.style.textAlign = 'center';
+  errorElement.textContent = 'Ошибка сервера';
+  document.body.append(errorElement);
 };
 
 //Отправка обьявления
 const sendDataSuccess = () => {
-  const temlate = document.querySelector('#success')
+  const temlateElement = document.querySelector('#success')
     .content
     .querySelector('.success');
-  const message = temlate.cloneNode(true);
+  const message = temlateElement.cloneNode(true);
   document.body.append(message);
 
   const removeMessage = (evt) => {
@@ -37,17 +37,17 @@ const sendDataSuccess = () => {
 
 //Ошибка отправки обьявления
 const sendDataError = () => {
-  const temlate = document.querySelector('#error')
+  const temlateElement = document.querySelector('#error')
     .content
     .querySelector('.error');
-  const message = temlate.cloneNode(true);
-  document.body.append(message);
+  const messageElement = temlateElement.cloneNode(true);
+  document.body.append(messageElement);
 
 
   const removeMessage = (evt) => {
     if (evt.type === 'keydown' && evt.key === 'Escape' || evt.type === 'click')  {
       evt.preventDefault();
-      message.remove();
+      messageElement.remove();
     }};
 
   document.addEventListener('click', removeMessage);

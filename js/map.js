@@ -6,12 +6,13 @@ import { makeRequest } from './api.js';
 import { filterData, MAX_OFFERS } from './filtration.js';
 import { resetPreview } from './preview.js';
 
+const CENTER_COORDINATES = {lat: 35.69034, lng: 139.75175};
+const ZOOM = 12;
+const TIMER_DELAY = 500;
 const address = document.querySelector('#address');
 const filters = document.querySelector('.map__filters');
 address.value = '35.69034, 139.75175';
 
-const CENTER_COORDINATES = {lat: 35.69034, lng: 139.75175};
-const ZOOM = 12;
 
 const L = window.L;
 const map = L.map('map-canvas');
@@ -75,7 +76,7 @@ let offers = [];
 const filterChangeHandler = debounce(() => {
   markerGroup.clearLayers();
   renderPinMarkers(filterData(offers));
-});
+}, TIMER_DELAY);
 
 //Загрузка обьявлений
 const showAds = (data) => {
