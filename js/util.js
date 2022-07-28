@@ -1,4 +1,4 @@
-const numDecline = (num, nominative, genitiveSingular, genitivePlural) => {
+const getNumDecline = (num, nominative, genitiveSingular, genitivePlural) => {
   if(num > 10 && (Math.round((num % 100) / 10)) === 1){
     return genitivePlural;
   }
@@ -15,7 +15,7 @@ const getAddressCoordinates = (form, coordinates) => {
   form.value = `${(coordinates.lat).toFixed(5)}, ${(coordinates.lng).toFixed(5)}`;
 };
 
-const debounce = (cb, timeout = 500) => {
+const debounce = (cb, timeout) => {
   let timer;
   return (...rest) => {
     clearTimeout(timer);
@@ -23,4 +23,4 @@ const debounce = (cb, timeout = 500) => {
   };
 };
 
-export { numDecline, getAddressCoordinates, debounce };
+export { getNumDecline, getAddressCoordinates, debounce };

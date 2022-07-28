@@ -23,15 +23,15 @@ const photoChooser = document.querySelector('.ad-form__upload input[type=file]')
 const photoPreview = document.querySelector('.ad-form__photo');
 
 photoChooser.addEventListener('change', () => {
-  const file = photoChooser.files[0];
+  const fileElement = photoChooser.files[0];
   const imageFragment = document.createDocumentFragment();
   const image = document.createElement('img');
-  image.width = '70';
-  image.height = '70';
+  image.width = 70;
+  image.height = 70;
   photoPreview.append(image);
   photoPreview.append(imageFragment);
 
-  filesTypeValidateHandler(file, photoPreview);
+  filesTypeValidateHandler(fileElement, photoPreview);
 });
 
 const resetPreview = () => {

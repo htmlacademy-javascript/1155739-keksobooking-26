@@ -5,7 +5,7 @@ const disabledFields = document.querySelectorAll('select.map__filter, fieldset')
 const address = adForm.querySelector('#address');
 address.setAttribute('readonly', true);
 
-const disabledToggle = () => {
+const makeDisabledToggle = () => {
   disabledFields.forEach((line) => {
     line.disabled = !line.disabled;
   });
@@ -15,7 +15,7 @@ const makeDisabled = () => {
   adForm.classList.toggle('ad-form--disabled');
   mapFilters.classList.toggle('map__filters--disabled');
 
-  disabledToggle();
+  makeDisabledToggle();
 };
 
 export {makeDisabled};
